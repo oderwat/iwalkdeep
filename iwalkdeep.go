@@ -1,10 +1,11 @@
-// The package "ideepwalk" helps to iterates over all directories
-// in a give path in bottom to top order. This is helpfull in many
-// use cases where you for example want to clean up empty directories
+// Package iwalkdeep is an iterator for the filesystem
+//
+// It helps to iterates over all directories in a give path in bottom to top order.
+// This is helpfull in many use cases where you for example want to clean up empty directories
 // after processing/moving files in the hierarchie.
 //
 // As speciality the packaged exposes this functionality also as an
-// easy to use iterator like in the following example
+// easy to use iterator like in the following example:
 //
 //  for dir := range IWalkDeep("/homes") {
 //    fmt.print(dir)
@@ -18,7 +19,7 @@ import (
 	"path/filepath"
 )
 
-// This function is called by WalkDeep for each directory
+// WalkDeepFunc is called by WalkDeep for each directory
 // on its way up to the root of the given path
 type WalkDeepFunc func(dir string)
 
@@ -52,13 +53,13 @@ func walkdeep(path string, fun WalkDeepFunc) string {
 	return path
 }
 
-// Walk all directories in root from bottom to top calling
+// WalkDeep walkes all directories in root from bottom to top calling
 // WalkDeepFunc for every encountered directory
 func WalkDeep(root string, fun WalkDeepFunc) {
 	fun(walkdeep(root, fun))
 }
 
-// This is the "Iterator" which can eaasily be used
+// IWalkDeep is the "Iterator" which can eaasily be used
 // for dir := range IWalkDeep(path) {}
 func IWalkDeep(root string) <-chan string {
 	ch := make(chan string)

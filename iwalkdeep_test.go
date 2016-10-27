@@ -1,8 +1,9 @@
 package iwalkdeep_test
 
 import (
-	. "github.com/oderwat/iwalkdeep"
 	"testing"
+
+	. "github.com/oderwat/iwalkdeep"
 )
 
 // Testing IWalkDeep can not rely on any order
